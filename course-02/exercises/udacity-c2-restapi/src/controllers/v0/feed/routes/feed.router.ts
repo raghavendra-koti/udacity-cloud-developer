@@ -16,15 +16,34 @@ router.get('/', async (req: Request, res: Response) => {
     res.send(items);
 });
 
-//@TODO
-//Add an endpoint to GET a specific resource by Primary Key
 
 // update a specific resource
 router.patch('/:id', 
     requireAuth, 
     async (req: Request, res: Response) => {
-        //@TODO try it yourself
-        res.send(500).send("not implemented")
+        const {id} = req.params;
+        const {caption} = req.body;
+        const aF = FeedItem.findByPk(id).then(
+            (item) => {
+                if(item) {
+                    item.caption = caption;  
+                    item.save().then(
+                        (a) => {
+                            return a;
+                        } 
+                    ).error (
+                        (err)  =>  res.status(500).send("Error")
+                    )
+                }
+                else { 
+                    res.status(500).send(`No Item with id ${id} found`)
+                }
+            }
+        ).error(
+            (err) =>  res.status(500).send(`Error retrieving item`)
+        )
+        const item = await aF;
+        res.send(200).send(item);
 });
 
 
@@ -33,9 +52,26 @@ router.get('/signed-url/:fileName',
     requireAuth, 
     async (req: Request, res: Response) => {
     let { fileName } = req.params;
+    console.log(fileName);
     const url = AWS.getPutSignedUrl(fileName);
     res.status(201).send({url: url});
 });
+
+//@TODO
+//Add an endpoint to GET a specific resource by Primary Key
+router.get('/:id', async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const item =  await FeedItem.findByPk(id).then (
+        (item) => {
+        if(item) { return item; }
+    }
+    );
+
+    if(item && item.url) item.url = AWS.getGetSignedUrl(item.url);
+    res.status(200).send(item);
+})
+
+
 
 // Post meta data and the filename after a file is uploaded 
 // NOTE the file name is they key name in the s3 bucket.
