@@ -1,7 +1,10 @@
 # Udagram Image Filtering Microservice
+## URL 
+http://image-filter-dev-dev.ap-south-1.elasticbeanstalk.com/filteredimage?image_url=https://timedtcom.files.wordpress.com/2019/03/kitten-report.jpg
+
+Elastic Beanstalk Screenshot: AwsElasticBeanStalkDeployment.JPG
 
 ## Tasks
-
 ### Setup Node Environment
 
 You'll need to create a new node server. Open a new terminal within the project directory and run:
