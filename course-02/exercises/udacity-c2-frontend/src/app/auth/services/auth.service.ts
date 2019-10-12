@@ -19,6 +19,7 @@ export class AuthService {
   initToken() {
     const token = localStorage.getItem(JWT_LOCALSTORE_KEY);
     const user = <User> JSON.parse(localStorage.getItem(USER_LOCALSTORE_KEY));
+    console.log(token);
     if (token && user) {
       this.setTokenAndUser(token, user);
     }
@@ -27,6 +28,7 @@ export class AuthService {
   setTokenAndUser(token: string, user: User) {
     localStorage.setItem(JWT_LOCALSTORE_KEY, token);
     localStorage.setItem(USER_LOCALSTORE_KEY, JSON.stringify(user));
+    console.log(token);
     this.api.setAuthToken(token);
     this.currentUser$.next(user);
   }
