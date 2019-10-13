@@ -1,6 +1,6 @@
 # Udagram Image Filtering Microservice
 ## URL 
-http://image-filter-dev-dev.ap-south-1.elasticbeanstalk.com/filteredimage?image_url=https://timedtcom.files.wordpress.com/2019/03/kitten-report.jpg
+http://image-filter-dev-dev.ap-south-1.elasticbeanstalk.com/filteredimage?image_url=https://timedotcom.files.wordpress.com/2019/03/kitten-report.jpg
 
 Elastic Beanstalk Screenshot: AwsElasticBeanStalkDeployment.JPG
 
